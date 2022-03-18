@@ -29,7 +29,17 @@ echo "$0: Installing Docker Engine..."
 sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 
-# Section 2: Linux Post-install
+# Section 2: Install Docker Compose
+# refer to https://docs.docker.com/compose/install/
+echo "$0: Installing Docker Compose..."
+
+echo "$0: Downloading current stable release for docker-compose..."
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+echo "$0: Applying executable permissions to the binary..."
+sudo chmod +x /usr/local/bin/docker-compose
+
+# Section 3: Linux Post-install
 # refer to https://docs.docker.com/engine/install/linux-postinstall/
 echo "$0: Initiating post-installation steps..."
 
@@ -41,13 +51,3 @@ sudo usermod -aG docker $USER
 
 echo "$0: Re-evaluating group membership..."
 newgrp docker
-
-# Section 3: Install Docker Compose
-# refer to https://docs.docker.com/compose/install/
-echo "$0: Installing Docker Compose..."
-
-echo "$0: Downloading current stable release for docker-compose..."
-sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-
-echo "$0: Applying executable permissions to the binary..."
-sudo chmod +x /usr/local/bin/docker-compose
