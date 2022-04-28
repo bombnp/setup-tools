@@ -11,7 +11,7 @@ fi
 
 echo "$0: Installing required packages..."
 sudo apt-get update
-sudo apt-get install \
+sudo apt-get install -y \
   ca-certificates \
   curl \
   gnupg \
