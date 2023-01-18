@@ -28,7 +28,7 @@ echo \
 
 echo "$0: Installing Docker Engine..."
 sudo apt-get update
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
 # Section 3: Linux Post-install
 # refer to https://docs.docker.com/engine/install/linux-postinstall/
