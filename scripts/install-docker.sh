@@ -18,26 +18,17 @@ sudo apt-get install -y \
   lsb-release
 
 echo "$0: Adding Docker's official GPG key..."
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 
 echo "$0: Setting up stable repository..."
 echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 echo "$0: Installing Docker Engine..."
 sudo apt-get update
-sudo apt-get install -y docker-ce docker-ce-cli containerd.io
-
-# Section 2: Install Docker Compose
-# refer to https://docs.docker.com/compose/install/
-echo "$0: Installing Docker Compose..."
-
-echo "$0: Downloading current stable release for docker-compose..."
-sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-
-echo "$0: Applying executable permissions to the binary..."
-sudo chmod +x /usr/local/bin/docker-compose
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
 # Section 3: Linux Post-install
 # refer to https://docs.docker.com/engine/install/linux-postinstall/
