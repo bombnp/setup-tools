@@ -12,7 +12,7 @@ fi
 echo "$0: Installing required packages..."
 # Add Docker's official GPG key:
 sudo apt-get update
-sudo apt-get install ca-certificates curl
+sudo apt-get install -y ca-certificates curl
 
 echo "$0: Adding Docker's official GPG key..."
 sudo install -m 0755 -d /etc/apt/keyrings
